@@ -1,158 +1,38 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giriş ve Kayıt</title>
-    <style>
-        /* Genel stil */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: url('https://source.unsplash.com/1600x900/?developer,code') no-repeat center center/cover;
-            position: relative;
-        }
-        .container {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 90%;
-            max-width: 400px;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            width: 100%;
-            border-radius: 5px;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-        .hidden {
-            display: none;
-        }
-        .notification {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: green;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            display: none;
-        }
-
-        /* Media Queries - Mobil ve Masaüstü uyumluluğu */
-        @media (max-width: 768px) {
-            body {
-                background-size: cover;
-                height: auto;
-            }
-            .container {
-                width: 90%;
-                padding: 15px;
-            }
-        }
-
-        @media (min-width: 769px) {
-            body {
-                background-size: cover;
-                height: 100vh;
-            }
-            .container {
-                width: 30%;
-            }
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>My Developer</title>
 </head>
 <body>
-    <div class="notification" id="notification"></div>
-    <div class="container">
-        <h2 id="form-title">Giriş Yap</h2>
-        <div id="login-form">
-            <input type="text" id="login-username" placeholder="Kullanıcı Adı">
-            <input type="password" id="login-password" placeholder="Şifre">
-            <button onclick="login()">Oturum Aç</button>
-            <p>Hesabın yok mu? <a href="#" onclick="showRegister()">Kaydol</a></p>
+    <header>
+        <a href="#" class="logo" translate="no">Jonathan</a>
+        <nav>
+            <a href="#" class="active">Home</a>
+            <a href="https://discord.gg/56xJKfSc">Contact</a>
+        </nav>
+    </header>
+    
+    <section class="home">
+        <div class="home-img">
+            <img src="Site.png" alt="Developer Image">
         </div>
-        <div id="register-form" class="hidden">
-            <input type="text" id="register-username" placeholder="Kullanıcı Adı">
-            <input type="password" id="register-password" placeholder="Şifre">
-            <button onclick="register()">Kaydol</button>
-            <p>Zaten hesabın var mı? <a href="#" onclick="showLogin()">Giriş Yap</a></p>
+        <div class="home-content">
+            <h1>Hi, It's <span>Jonathan</span></h1> <!-- Düzeltildi: <translate="no"> etiketi hatalıydı -->
+            <h3 class="typing-text">I'm a <span></span></h3>
+            <p>As a developer, I am a technology professional focused on creative problem-solving and effective software development processes. While coding, I prioritize not only technical details but also user experience and the creation of sustainable solutions. I am passionate about continuous learning and growth, striving to add value to projects both individually and collaboratively within a team.</p>
+            <div class="social-icons">
+                <a href="https://discord.gg/QpN9tkab"><i class="fa-brands fa-discord"></i></a>
+                <a href="https://github.com/teyfik123"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.instagram.com/jonathanthompson011?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://open.spotify.com/user/31b5prqoi7do7exdaoakezamri7q?si=bacc80de063b41ac"><i class="fa-brands fa-spotify"></i></a>
+            </div>
+            <a href="#" class="btn">Hire me</a>
         </div>
-    </div>
+    </section>
 
-    <script>
-        let registeredUser = null;
-        let registeredPassword = null;
-
-        function showRegister() {
-            document.getElementById("login-form").classList.add("hidden");
-            document.getElementById("register-form").classList.remove("hidden");
-            document.getElementById("form-title").innerText = "Kaydol";
-        }
-
-        function showLogin() {
-            document.getElementById("register-form").classList.add("hidden");
-            document.getElementById("login-form").classList.remove("hidden");
-            document.getElementById("form-title").innerText = "Giriş Yap";
-        }
-
-        function showNotification(message) {
-            const notification = document.getElementById("notification");
-            notification.innerText = message;
-            notification.style.display = "block";
-            setTimeout(() => {
-                notification.style.display = "none";
-            }, 3000);
-        }
-
-        function register() {
-            const username = document.getElementById("register-username").value;
-            const password = document.getElementById("register-password").value;
-            
-            if (username && password) {
-                if (registeredUser) {
-                    alert("Sadece bir hesap oluşturulabilir!");
-                    return;
-                }
-                registeredUser = username;
-                registeredPassword = password;
-                showNotification("Başarıyla kayıt olundu!");
-                showLogin();
-            } else {
-                alert("Lütfen geçerli bir kullanıcı adı ve şifre girin.");
-            }
-        }
-
-        function login() {
-            const username = document.getElementById("login-username").value;
-            const password = document.getElementById("login-password").value;
-            
-            if (username === registeredUser && password === registeredPassword) {
-                showNotification("Başarıyla giriş yapıldı!");
-            } else {
-                alert("Hatalı kullanıcı adı veya şifre!");
-            }
-        }
-    </script>
 </body>
 </html>
